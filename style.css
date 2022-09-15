@@ -1,0 +1,132 @@
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700&display=swap");
+
+:root {
+  /* colors variable */
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+* {
+  font-family: "Barlow Semi Condensed", sans-serif;
+  font-size: 13px;
+}
+body {
+  background: radial-gradient(
+    circle at top,
+    hsl(214, 47%, 23%),
+    hsl(237, 49%, 15%)
+  );
+}
+header {
+  display: flex;
+  justify-content: center;
+  margin: 50px;
+}
+.top-bar {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  border: 3px solid hsl(217, 16%, 45%);
+  border-radius: 10px;
+  width: 600px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.left-side {
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 10px;
+}
+.left-side p {
+  font-size: 2.5rem;
+  margin: 0;
+  padding: 0;
+  line-height: 25px;
+}
+.right-side {
+  display: flex;
+  justify-content: right;
+}
+.score-container {
+  background-color: rgb(255, 255, 255);
+  width: 80px;
+  text-align: center;
+  border-radius: 5px;
+  padding: 10px;
+}
+.score-container p {
+  margin: 0;
+}
+.score-container p:nth-child(1) {
+  color: hsl(229, 64%, 46%);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.score-container p:nth-child(2) {
+  color: hsl(229, 25%, 31%);
+  font-size: 3rem;
+  font-weight: 700;
+}
+main {
+  width: 600px;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  margin-top: 200px;
+}
+.game-state-1 {
+  background-image: url(./images/bg-triangle.svg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  aspect-ratio: 313/278;
+  position: relative;
+  width: 50%;
+}
+.choices div {
+  position: absolute;
+  margin: 0;
+  height: 60%;
+  width: 60%;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.choices div:hover,
+.choices div button:hover {
+  cursor: pointer;
+}
+.choices div button {
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  border: none;
+}
+.paper-container {
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(hsl(230, 89%, 62%), hsl(230, 89%, 65%));
+}
+.scissors-container {
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+  background: linear-gradient(hsl(39, 89%, 49%), hsl(40, 84%, 53%));
+}
+.rock-container {
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  background: linear-gradient(hsl(349, 71%, 52%), hsl(349, 70%, 56%));
+}
+@media (max-width: 700px) {
+  main {
+    width: 90%;
+  }
+}
