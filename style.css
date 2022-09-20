@@ -15,6 +15,8 @@ body {
   );
   background-size: contain;
   background-repeat: no-repeat;
+  width: 100%;
+  overflow-x: auto;
 }
 * {
   font-family: "Barlow Semi Condensed", sans-serif;
@@ -24,7 +26,7 @@ body {
 header {
   display: flex;
   justify-content: center;
-  margin: 50px;
+  margin: 50px 25px 50px 25px;
 }
 .top-bar {
   display: grid;
@@ -79,26 +81,29 @@ main {
   display: flex;
   justify-content: center;
   margin: auto;
-
-  padding-bottom: 200px;
 }
-.game-state-1 {
+.game-state-1 .state-1 {
   background-image: url(./images/bg-triangle.svg);
   background-repeat: no-repeat;
   background-size: 100%;
-  aspect-ratio: 313/278;
+  aspect-ratio: 1/1;
   position: relative;
   width: 50%;
+}
+.choices {
+  width: 100%;
+  height: 100%;
 }
 .choices div {
   position: absolute;
   margin: 0;
-  height: 80%;
-  width: 80%;
+  height: 70%;
+  width: 70%;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+  aspect-ratio: 1/1;
 }
 .choices div:hover,
 .choices div button:hover {
@@ -113,31 +118,39 @@ main {
 .paper-container {
   top: 0;
   left: 0;
-  transform: translate(-50%, -50%);
+  transform: translate(-40%, -40%);
   background: linear-gradient(hsl(230, 89%, 62%), hsl(230, 89%, 65%));
 }
 .scissors-container {
   top: 0;
   right: 0;
-  transform: translate(50%, -50%);
+  transform: translate(40%, -40%);
   background: linear-gradient(hsl(39, 89%, 49%), hsl(40, 84%, 53%));
 }
 .rock-container {
   bottom: 0;
   left: 50%;
-  transform: translate(-50%, 50%);
+  transform: translate(-50%, 30%);
   background: linear-gradient(hsl(349, 71%, 52%), hsl(349, 70%, 56%));
 }
-
+.state-2 {
+  display: none;
+}
+.state-1 {
+  display: none;
+}
 /* states */
-.game-state-1 {
+.game-state-1 .state-1 {
   margin-top: 100px;
   display: block;
   position: relative;
 }
-.game-state-2 {
+.game-state-2 .state-2 {
   display: block;
   width: 600px;
+}
+.game-state-3 .state-2 {
+  width: 900px;
 }
 .picks {
   width: 100%;
@@ -194,12 +207,50 @@ main {
   display: none;
 }
 
+.hidden {
+  display: none !important;
+}
+.winner-status {
+  display: none;
+}
+.game-state-3 .state-2 {
+  display: block;
+}
+.game-state-3 > div > div {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 900px;
+  gap: 100px;
+}
+.game-state-3 .winner-status {
+  display: flex;
+  align-self: center;
+  justify-content: center;
+}
+.winner-status button {
+  width: 80%;
+  margin: auto;
+  height: 50px;
+  color: hsl(229, 25%, 31%);
+  text-transform: uppercase;
+  border-radius: 5px;
+  letter-spacing: 2px;
+  margin-top: 0;
+  cursor: pointer;
+}
+.winner-status p {
+  margin-bottom: 0;
+  padding-bottom: 10px;
+  font-size: 3.5rem;
+  text-transform: uppercase;
+}
+
+.game-state-3 > div {
+  width: 900px;
+}
 @media (max-width: 700px) {
   main {
     width: 90%;
-  }
-  .picks {
-    gap: 0;
   }
   .picks div h1 {
     order: 2;
@@ -208,10 +259,117 @@ main {
   .picks div div {
     order: 1;
   }
+  .game-state-3 {
+    width: 90%;
+  }
+  .game-state-1 .state-1 {
+    width: 65%;
+  }
+  .picks {
+    gap: 25px;
+  }
+
+  .game-state-3 .state-2 div {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .game-state-3 .state-2 {
+    width: 600px;
+  }
+  .game-state-3 .state-2 div {
+    column-gap: 25px !important;
+    row-gap: 0;
+    width: 100%;
+  }
+  .game-state-3 .state-2 div div {
+  }
+  .winner-status {
+    grid-area: 2 / span 2;
+    margin-top: 0;
+    padding-top: 0;
+  }
+  .winner-status p {
+    font-size: 5rem;
+  }
+  .winner-status button {
+    width: 70%;
+  }
 }
-.hidden {
-  display: none !important;
+@media (max-width: 1000px) {
+  main {
+    width: 90%;
+  }
+  .game-state-3 .state-2 .picks {
+    width: 100%;
+    gap: 0;
+  }
 }
-.game-state-3 .picks {
-  grid-template-columns: repeat(3, 1fr);
+
+/* footer */
+footer {
+  display: flex;
+  position: fixed;
+  bottom: 5%;
+  right: 20px;
+  justify-content: flex-end;
+}
+footer button {
+  border-radius: 5px;
+  background-color: transparent;
+  border: 2px solid rgb(255, 255, 255);
+  padding: 10px 35px 10px 35px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+button {
+  cursor: pointer;
+}
+@media (max-width: 700px) {
+  footer {
+    right: 50%;
+    transform: translate(50%, 0);
+  }
+}
+/* modal system */
+
+.modal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  text-align: center;
+  background-color: white;
+  padding: 50px;
+  border-radius: 10px;
+  opacity: 1;
+}
+.modal h1 {
+  color: hsl(229, 25%, 31%);
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  margin-bottom: 100px;
+}
+.modal button {
+  position: absolute;
+  right: 2%;
+  top: 0;
+  border: none;
+}
+.modal button span {
+  padding: 0;
+  color: black;
+  font-size: 3rem;
+}
+.overlay {
+  position: absolute;
+  min-height: 100%;
+  min-width: 100%;
+  background: black;
+  opacity: 0.5;
+  z-index: 1;
+}
+@media (max-width: 500px) {
+  .modal {
+    padding: 5%;
+  }
 }
